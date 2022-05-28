@@ -1,6 +1,6 @@
 <template>
     <div v-cloak>
-        <form class="bor bg-light" @submit.prevent="newOrder">
+        <form v-if="state" class="bor bg-light" @submit.prevent="newOrder">
             <h1>Select a Customer</h1>
             <select class="form-control" v-model="order.CustomerID" id="cust"></select>
             <p></p>
@@ -23,7 +23,15 @@
                 <button class="btn btn-primary">Add Order</button>
             </div>
         </form>
-        <Tbl :listname="'Orders'" :columns="cols" :rows="orders" @modal-handler="openModal"
+
+        <Alert v-if="customers.length === 0" :list="'Customers'" :link="'customers'" />
+        <Alert v-if="employees.length === 0" :list="'Employees'" :link="'employees'" />
+        <Alert v-if="categories.length === 0" :list="'Categories'" :link="'categories'" />
+        <Alert v-if="products.length === 0" :list="'Products'" :link="'products'" />
+        <Alert v-if="shippers.length == 0" :list="'Shippers'" :link="'shippers'" />
+        <Alert v-if="suppliers.length === 0" :list="'Suppliers'" :link="'suppliers'" />
+        
+        <Tbl :listName="'Orders'" :columns="cols" :rows="orders" @modal-handler="openModal"
             @delete-handler="deleteOrder" />
 
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -65,8 +73,9 @@
 </template>
 
 <script setup>
-    import { ref, reactive, onMounted } from 'vue';
+    import { ref, reactive, onMounted, onUpdated } from 'vue';
     import Tbl from '@/components/TableDisplay.vue';
+    import Alert from '@/components/AlertData.vue';
 
     var modal;
 
@@ -89,6 +98,8 @@
     const products = ref([]);
     const suppliers = ref([]);
     const shippers = ref([]);
+
+    const state = ref(true);
 
     const orders = ref([]);
 
@@ -336,15 +347,28 @@
         });
     }
 
+    function checkData() {
+        if (customers.value.length == 0 || employees.value.length == 0 || categories.value.length == 0 ||
+            products.value.length == 0 || shippers.value.length == 0 || suppliers.value.length == 0) {
+            state.value = false;
+        } else {
+            state.value = true;
+        }
+    }
+
     onMounted(() => {
         modal = new bootstrap.Modal($('#editModal'));
         getAll();
         getOrders();
     });
+
+    onUpdated(() => {
+        checkData();
+    });
 </script>
 
 <style scoped>
-    [v-cloak]{
+    [v-cloak] {
         display: none;
     }
 
