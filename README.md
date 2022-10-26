@@ -32,3 +32,20 @@
   <li>On the default Schema to be Imported into Section, select a new schema to be imported into. Name the new schema computer-system</li>
   <li>Begin import</li>
 </ol>
+
+<h2>Setting up the Back End</h2>
+<ol>
+  <li>Open your respective code editor</li>
+  <li>Open a terminal for the back-end folder</li>
+  <li>Type 'npm i' in the terminal wait until all the modules are installed</li>
+  <li>Type 'npm start' to start the back-end of the application</li>
+</ol>
+
+<h2>Setting up the Front End</h2>
+<ol>
+  
+  <li>Open your respective code editor</li>
+  <li>Open a terminal for the front-end folder</li>
+  <li>Type 'npm i' in the terminal wait until all the modules are installed</li>
+  <li>Type 'npm run serve' to start the front-end of the application</li>
+</ol>
