@@ -43,9 +43,13 @@
 
 <h2>Setting up the Front End</h2>
 <ol>
-  
   <li>Open your respective code editor</li>
   <li>Open a terminal for the front-end folder</li>
   <li>Type 'npm i' in the terminal wait until all the modules are installed</li>
   <li>Type 'npm run serve' to start the front-end of the application</li>
+</ol>
+
+<h2>Opening application on browser</h2>
+<ol>
+  <li>Type localhost:8080 on a browser</li>
 </ol>
