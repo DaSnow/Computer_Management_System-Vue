@@ -2,22 +2,46 @@
     <div v-cloak>
         <form v-if="state" class="bor bg-light" @submit.prevent="newOrder">
             <h1>Select a Customer</h1>
-            <select class="form-control" v-model="order.CustomerID" id="cust"></select>
+            <select class="form-control" v-model="order.CustomerID">
+                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                        item.LastName
+                }}</option>
+            </select>
             <p></p>
             <h1>Select an Employee</h1>
-            <select class="form-control" v-model="order.EmployeeID" id="emp"></select>
+            <select class="form-control" v-model="order.EmployeeID">
+                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                        item.LastName
+                }}</option>
+            </select>
             <p></p>
             <h1>Select a Category</h1>
-            <select class="form-control" v-model="order.CategoryID" id="cat"></select>
+            <select class="form-control" v-model="order.CategoryID">
+                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                        item.LastName
+                }}</option>
+            </select>
             <p></p>
             <h1>Select a Product</h1>
-            <select class="form-control" v-model="order.ProductID" id="pro"></select>
+            <select class="form-control" v-model="order.ProductID">
+                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                        item.LastName
+                }}</option>
+            </select>
             <p></p>
             <h1>Select a Supplier</h1>
-            <select class="form-control" v-model="order.SupplierID" id="sup"></select>
+            <select class="form-control" v-model="order.SupplierID">
+                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                        item.LastName
+                }}</option>
+            </select>
             <p></p>
             <h1>Select a Shipper</h1>
-            <select class="form-control" v-model="order.ShipperID" id="ship"></select>
+            <select class="form-control" v-model="order.ShipperID">
+                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                        item.LastName
+                }}</option>
+            </select>
             <hr>
             <div style="text-align: end;">
                 <button class="btn btn-primary">Add Order</button>
@@ -30,7 +54,7 @@
         <Alert v-if="products.length === 0" :list="'Products'" :link="'products'" />
         <Alert v-if="shippers.length == 0" :list="'Shippers'" :link="'shippers'" />
         <Alert v-if="suppliers.length === 0" :list="'Suppliers'" :link="'suppliers'" />
-        
+
         <Tbl :listName="'Orders'" :columns="cols" :rows="orders" @modal-handler="openModal"
             @delete-handler="deleteOrder" />
 
@@ -44,22 +68,46 @@
                     <div class="modal-body">
                         <form class="none">
                             <h1>Customer</h1>
-                            <select class="form-control" v-model="edit.CustomerID" id="cust2"></select>
+                            <select class="form-control" v-model="edit.CustomerID">
+                                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                                        item.LastName
+                                }}</option>
+                            </select>
                             <p></p>
                             <h1>Employee</h1>
-                            <select class="form-control" v-model="edit.EmployeeID" id="emp2"></select>
+                            <select class="form-control" v-model="edit.EmployeeID">
+                                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                                        item.LastName
+                                }}</option>
+                            </select>
                             <p></p>
                             <h1>Category</h1>
-                            <select class="form-control" v-model="edit.CategoryID" id="cat2"></select>
+                            <select class="form-control" v-model="edit.CategoryID">
+                                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                                        item.LastName
+                                }}</option>
+                            </select>
                             <p></p>
                             <h1>Product</h1>
-                            <select class="form-control" v-model="edit.ProductID" id="pro2"></select>
+                            <select class="form-control" v-model="edit.ProductID">
+                                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                                        item.LastName
+                                }}</option>
+                            </select>
                             <p></p>
                             <h1>Supplier</h1>
-                            <select class="form-control" v-model="edit.SupplierID" id="sup2"></select>
+                            <select class="form-control" v-model="edit.SupplierID">
+                                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                                        item.LastName
+                                }}</option>
+                            </select>
                             <p></p>
                             <h1>Shipper</h1>
-                            <select class="form-control" v-model="edit.ShipperID" id="ship2"></select>
+                            <select class="form-control" v-model="edit.ShipperID">
+                                <option v-for="(item) in shippers" :value="item.ID">{{ item.Name }} {{
+                                        item.LastName
+                                }}</option>
+                            </select>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -73,307 +121,314 @@
 </template>
 
 <script setup>
-    import { ref, reactive, onMounted, onUpdated } from 'vue';
-    import Tbl from '@/components/TableDisplay.vue';
-    import Alert from '@/components/AlertData.vue';
+import { ref, reactive, onMounted, onUpdated } from 'vue';
+import Tbl from '@/components/TableDisplay.vue';
+import Alert from '@/components/AlertData.vue';
 
-    var modal;
+var modal;
 
-    const baseURL = 'http://localhost:3000/';
+const baseURL = 'http://localhost:3000/';
 
-    const cols = ref([
-        "Order ID",
-        "Customer ID",
-        "Employee ID",
-        "Category ID",
-        "Product ID",
-        "Supplier ID",
-        "Shipper ID",
-        "Actions"
-    ]);
+const cols = ref([
+    "Order ID",
+    "Customer ID",
+    "Employee ID",
+    "Category ID",
+    "Product ID",
+    "Supplier ID",
+    "Shipper ID",
+    "Actions"
+]);
 
-    const customers = ref([]);
-    const employees = ref([]);
-    const categories = ref([]);
-    const products = ref([]);
-    const suppliers = ref([]);
-    const shippers = ref([]);
+const customers = ref([]);
+const employees = ref([]);
+const categories = ref([]);
+const products = ref([]);
+const suppliers = ref([]);
+const shippers = ref([]);
 
-    const state = ref(true);
+const state = ref(true);
 
-    const orders = ref([]);
+const orders = ref([]);
 
-    const order = reactive({
-        CustomerID: 0,
-        EmployeeID: 0,
-        CategoryID: 0,
-        ProductID: 0,
-        SupplierID: 0,
-        ShipperID: 0
-    });
+const order = reactive({
+    CustomerID: 0,
+    EmployeeID: 0,
+    CategoryID: 0,
+    ProductID: 0,
+    SupplierID: 0,
+    ShipperID: 0
+});
 
-    const editID = ref(0);
+const editID = ref(0);
 
-    const edit = reactive({
-        CustomerID: 0,
-        EmployeeID: 0,
-        CategoryID: 0,
-        ProductID: 0,
-        SupplierID: 0,
-        ShipperID: 0
-    });
+const edit = reactive({
+    CustomerID: 0,
+    EmployeeID: 0,
+    CategoryID: 0,
+    ProductID: 0,
+    SupplierID: 0,
+    ShipperID: 0
+});
 
-    function getAll() {
-        getAllCustomers();
-        getAllEmployees();
-        getAllCategories();
-        getAllProducts();
-        getAllSuppliers();
-        getAllShippers();
-    }
+function eyed(id) {
+    console.log(id)
+}
 
-    function getAllCustomers() {
-        $.ajax({
-            url: baseURL + 'customers/',
-            type: 'GET',
-            success: (data, status) => {
-                if (status === 'success') {
-                    customers.value = JSON.parse(data);
-                    printCustomers();
-                }
+function getAll() {
+    getAllCustomers();
+    getAllEmployees();
+    getAllCategories();
+    getAllProducts();
+    getAllSuppliers();
+    getAllShippers();
+}
+
+function getAllCustomers() {
+    $.ajax({
+        url: baseURL + 'customers/',
+        type: 'GET',
+        success: (data, status) => {
+            if (status === 'success') {
+                customers.value = JSON.parse(data);
+                printCustomers();
             }
-        });
-    }
-
-    function getAllEmployees() {
-        $.ajax({
-            url: baseURL + 'employees/',
-            type: 'GET',
-            success: (data, status) => {
-                if (status === 'success') {
-                    employees.value = JSON.parse(data);
-                    printEmployees();
-                }
-            }
-        });
-    }
-
-    function getAllCategories() {
-        $.ajax({
-            url: baseURL + 'categories/',
-            type: 'GET',
-            success: (data, status) => {
-                if (status === 'success') {
-                    categories.value = JSON.parse(data);
-                    printCategories();
-                }
-            }
-        });
-    }
-
-    function getAllProducts() {
-        $.ajax({
-            url: baseURL + 'products/',
-            type: 'GET',
-            success: (data, status) => {
-                if (status === 'success') {
-                    products.value = JSON.parse(data);
-                    printProducts();
-                }
-            }
-        });
-    }
-
-    function getAllSuppliers() {
-        $.ajax({
-            url: baseURL + 'suppliers/',
-            type: 'GET',
-            success: (data, status) => {
-                if (status === 'success') {
-                    suppliers.value = JSON.parse(data);
-                    printSuppliers();
-                }
-            }
-        });
-    }
-
-    function getAllShippers() {
-        $.ajax({
-            url: baseURL + 'shippers/',
-            type: 'GET',
-            success: (data, status) => {
-                if (status === 'success') {
-                    shippers.value = JSON.parse(data);
-                    printShippers();
-                }
-            }
-        });
-    }
-
-    function getOrders() {
-        $.ajax({
-            url: baseURL,
-            type: 'GET',
-            success: (data, status) => {
-                if (status === 'success')
-                    orders.value = JSON.parse(data);
-            }
-        });
-    }
-
-    function printCustomers() {
-        let ice;
-        customers.value.forEach(d => {
-            ice += `<option value="${d.CustomerID}">${d.Name} ${d.LastName}</option>`;
-        });
-        $('#cust').html(ice);
-        $('#cust2').html(ice);
-    }
-
-    function printEmployees() {
-        let ice;
-        employees.value.forEach(d => {
-            ice += `<option value="${d.EmployeeID}">${d.Name} ${d.LastName}</option>`;
-        });
-        $('#emp').html(ice);
-        $('#emp2').html(ice);
-    }
-
-    function printCategories() {
-        let ice;
-        categories.value.forEach(d => {
-            ice += `<option value="${d.CategoryID}">${d.Name}</option>`;
-        });
-        $('#cat').html(ice);
-        $('#cat2').html(ice);
-    }
-
-    function printProducts() {
-        let ice;
-        products.value.forEach(d => {
-            ice += `<option value="${d.ProductID}">${d.Name}</option>`;
-        });
-        $('#pro').html(ice);
-        $('#pro2').html(ice);
-    }
-
-    function printSuppliers() {
-        let ice;
-        suppliers.value.forEach(d => {
-            ice += `<option value="${d.SupplierID}">${d.Name}</option>`;
-        });
-        $('#sup').html(ice);
-        $('#sup2').html(ice);
-    }
-
-    function printShippers() {
-        let ice;
-        shippers.value.forEach(d => {
-            ice += `<option value="${d.ShipperID}">${d.Name}</option>`;
-        });
-        $('#ship').html(ice);
-        $('#ship2').html(ice);
-    }
-
-    function newOrder() {
-        if (order.CustomerID > 0 || order.EmployeeID > 0 || order.CategoryID > 0 ||
-            order.ProductID > 0 || order.SupplierID > 0 || order.ShipperID > 0) {
-            $.ajax({
-                url: baseURL + 'add',
-                type: 'POST',
-                data: order,
-                success: (data, status) => {
-                    if (status === 'success') {
-                        swal({
-                            title: "Well Done!",
-                            icon: "success"
-                        });
-                        getOrders();
-                    }
-                }
-            });
-        } else {
-            swal({
-                title: 'Hold Up',
-                text: "Fill out all fields",
-                icon: 'error'
-            });
         }
-    }
+    });
+}
 
-    function openModal(d) {
-        editID.value = d.OrderID;
-        edit.CustomerID = d.CustomerID;
-        edit.EmployeeID = d.EmployeeID;
-        edit.CategoryID = d.CategoryID;
-        edit.ProductID = d.ProductID;
-        edit.SupplierID = d.SupplierID;
-        edit.ShipperID = d.ShipperID;
-        modal.show();
-    }
-
-    function updateOrder() {
-        if (edit.CustomerID > 0 || edit.EmployeeID > 0 || edit.CategoryID > 0 ||
-            edit.ProductID > 0 || edit.SupplierID > 0 || edit.ShipperID > 0) {
-            $.ajax({
-                type: 'PUT',
-                data: edit,
-                url: baseURL + `update/${editID.value}`,
-                success: (data, status) => {
-                    if (status === 'success') {
-                        getOrders();
-                        modal.hide();
-                    }
-                }
-            });
-        } else {
-            swal({
-                title: 'Hold Up',
-                text: "Fill out all fields",
-                icon: 'error'
-            });
+function getAllEmployees() {
+    $.ajax({
+        url: baseURL + 'employees/',
+        type: 'GET',
+        success: (data, status) => {
+            if (status === 'success') {
+                employees.value = JSON.parse(data);
+                printEmployees();
+            }
         }
-    }
+    });
+}
 
-    function deleteOrder(row) {
-        let id = row.OrderID;
+function getAllCategories() {
+    $.ajax({
+        url: baseURL + 'categories/',
+        type: 'GET',
+        success: (data, status) => {
+            if (status === 'success') {
+                categories.value = JSON.parse(data);
+                printCategories();
+            }
+        }
+    });
+}
+
+function getAllProducts() {
+    $.ajax({
+        url: baseURL + 'products/',
+        type: 'GET',
+        success: (data, status) => {
+            if (status === 'success') {
+                products.value = JSON.parse(data);
+                printProducts();
+            }
+        }
+    });
+}
+
+function getAllSuppliers() {
+    $.ajax({
+        url: baseURL + 'suppliers/',
+        type: 'GET',
+        success: (data, status) => {
+            if (status === 'success') {
+                suppliers.value = JSON.parse(data);
+                printSuppliers();
+            }
+        }
+    });
+}
+
+function getAllShippers() {
+    $.ajax({
+        url: baseURL + 'shippers/',
+        type: 'GET',
+        success: (data, status) => {
+            if (status === 'success') {
+                shippers.value = JSON.parse(data);
+                printShippers();
+            }
+        }
+    });
+}
+
+function getOrders() {
+    $.ajax({
+        url: baseURL,
+        type: 'GET',
+        success: (data, status) => {
+            if (status === 'success')
+                orders.value = JSON.parse(data);
+        }
+    });
+}
+
+function printCustomers() {
+    let ice;
+    customers.value.forEach(d => {
+        ice += `<option value="${d.CustomerID}">${d.Name} ${d.LastName}</option>`;
+    });
+    $('#cust1').html(ice);
+    $('#cust2').html(ice);
+}
+
+function printEmployees() {
+    let ice;
+    employees.value.forEach(d => {
+        ice += `<option value="${d.EmployeeID}">${d.Name} ${d.LastName}</option>`;
+    });
+    $('#emp').html(ice);
+    $('#emp2').html(ice);
+}
+
+function printCategories() {
+    let ice;
+    categories.value.forEach(d => {
+        ice += `<option value="${d.CategoryID}">${d.Name}</option>`;
+    });
+    $('#cat').html(ice);
+    $('#cat2').html(ice);
+}
+
+function printProducts() {
+    let ice;
+    products.value.forEach(d => {
+        ice += `<option value="${d.ProductID}">${d.Name}</option>`;
+    });
+    $('#pro').html(ice);
+    $('#pro2').html(ice);
+}
+
+function printSuppliers() {
+    let ice;
+    suppliers.value.forEach(d => {
+        ice += `<option value="${d.SupplierID}">${d.Name}</option>`;
+    });
+    $('#sup').html(ice);
+    $('#sup2').html(ice);
+}
+
+function printShippers() {
+    let ice;
+    shippers.value.forEach(d => {
+        ice += `<option value="${d.ID}">${d.Name}</option>`;
+        $('#shipper1').append(new Option(d.Name, d.ShipperID));
+        let select = document.getElementById('shipper1')
+        let newOp = new Option(d.Name, d.ID)
+    });
+    // $('#ship').html(ice);
+    $('#ship2').html(ice);
+}
+
+function newOrder() {
+    if (order.CustomerID > 0 && order.EmployeeID > 0 && order.CategoryID > 0 &&
+        order.ProductID > 0 && order.SupplierID > 0 && order.ShipperID > 0) {
         $.ajax({
-            type: 'DELETE',
-            url: baseURL + `delete/${id}`,
+            url: baseURL + 'add',
+            type: 'POST',
+            data: order,
             success: (data, status) => {
-                if (status === 'success')
+                if (status === 'success') {
+                    swal({
+                        title: "Well Done!",
+                        icon: "success"
+                    });
                     getOrders();
+                }
             }
         });
+    } else {
+        swal({
+            title: 'Hold Up',
+            text: "Fill out all fields",
+            icon: 'error'
+        });
     }
+}
 
-    function checkData() {
-        if (customers.value.length == 0 || employees.value.length == 0 || categories.value.length == 0 ||
-            products.value.length == 0 || shippers.value.length == 0 || suppliers.value.length == 0) {
-            state.value = false;
-        } else {
-            state.value = true;
+function openModal(d) {
+    editID.value = d.OrderID;
+    edit.CustomerID = d.CustomerID;
+    edit.EmployeeID = d.EmployeeID;
+    edit.CategoryID = d.CategoryID;
+    edit.ProductID = d.ProductID;
+    edit.SupplierID = d.SupplierID;
+    edit.ShipperID = d.ShipperID;
+    modal.show();
+}
+
+function updateOrder() {
+    if (edit.CustomerID > 0 && edit.EmployeeID > 0 && edit.CategoryID > 0 &&
+        edit.ProductID > 0 && edit.SupplierID > 0 && edit.ShipperID > 0) {
+        $.ajax({
+            type: 'PUT',
+            data: edit,
+            url: baseURL + `update/${editID.value}`,
+            success: (data, status) => {
+                if (status === 'success') {
+                    getOrders();
+                    modal.hide();
+                }
+            }
+        });
+    } else {
+        swal({
+            title: 'Hold Up',
+            text: "Fill out all fields",
+            icon: 'error'
+        });
+    }
+}
+
+function deleteOrder(row) {
+    let id = row.OrderID;
+    $.ajax({
+        type: 'DELETE',
+        url: baseURL + `delete/${id}`,
+        success: (data, status) => {
+            if (status === 'success')
+                getOrders();
         }
+    });
+}
+
+function checkData() {
+    if (customers.value.length == 0 || employees.value.length == 0 || categories.value.length == 0 ||
+        products.value.length == 0 || shippers.value.length == 0 || suppliers.value.length == 0) {
+        state.value = false;
+    } else {
+        state.value = true;
     }
+}
 
-    onMounted(() => {
-        modal = new bootstrap.Modal($('#editModal'));
-        getAll();
-        getOrders();
-    });
+onMounted(() => {
+    modal = new bootstrap.Modal($('#editModal'));
+    getAll();
+    getOrders();
+});
 
-    onUpdated(() => {
-        checkData();
-    });
+onUpdated(() => {
+    checkData();
+});
 </script>
 
 <style scoped>
-    [v-cloak] {
-        display: none;
-    }
+[v-cloak] {
+    display: none;
+}
 
-    .bor {
-        border: 1px solid black;
-        border-radius: 15px;
-    }
+.bor {
+    border: 1px solid black;
+    border-radius: 15px;
+}
 </style>

@@ -23,7 +23,7 @@ router.post('/add', (req, res) => {
 });
 
 router.put('/update/:id', (req, res) => {
-    let cmd = 'UPDATE customers SET ? WHERE CustomerID = ?';
+    let cmd = 'UPDATE customers SET ? WHERE ID = ?';
     conn.query(cmd, [req.body, req.params.id], (error, result) => {
         if (error) {
             console.log("failed to update from customers");
@@ -34,7 +34,7 @@ router.put('/update/:id', (req, res) => {
 });
 
 router.delete('/delete/:id', (req, res) => {
-    let cmd = 'DELETE FROM customers WHERE CustomerID = ?';
+    let cmd = 'DELETE FROM customers WHERE ID = ?';
     conn.query(cmd, req.params.id, (error, result) => {
         if (error) {
             console.log("failed to delete from customers");
