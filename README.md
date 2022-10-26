@@ -6,7 +6,7 @@
   <li>Open this link, https://dev.mysql.com/downloads/</li>
   <li>Choose MySQL Installer for Windows</li>
   <li>Download Windows (x86, 32-bit), MSI Installer with a size of 431.7M</li>
-  <li>Press <u>No thanks, just start my download.</u></li>
+  <li>Press "No thanks, just start my download."</li>
   <li>Open the MySQL Launcher</li>
   <li>Choose Developer Default for the type of installation</li>
   <li>Choose the default options for all choices present</li>
@@ -22,4 +22,13 @@
   <li>Choose the installer for your respective Operating System</li>
   <li>Open the installer</li>
   <li>Choose all default settings</li>
+</ol>
+
+<h2>Importing schema</h2>
+<ol>
+  <li>On the Server tab, choose Data Import</li>
+  <li>Choose 'Import from Self-Contained File'</li>
+  <li>Search for the sql file on the data folder inside the back-end folder</li>
+  <li>On the default Schema to be Imported into Section, select a new schema to be imported into. Name the new schema computer-system</li>
+  <li>Begin import</li>
 </ol>
