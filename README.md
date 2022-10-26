@@ -7,5 +7,19 @@
   <li>Choose MySQL Installer for Windows</li>
   <li>Download Windows (x86, 32-bit), MSI Installer with a size of 431.7M</li>
   <li>Press <u>No thanks, just start my download.</u></li>
-  <li></li>
+  <li>Open the MySQL Launcher</li>
+  <li>Choose Developer Default for the type of installation</li>
+  <li>Choose the default options for all choices present</li>
+  <li>When the Account and Roles page is reached, set the Root Account Password to 'root'</li>
+  <li>Continue to choose the default options for all choices present</li>
+  <li>On the Connect to Server page insert the root account credentials to connect the server</li>
+  <li>Continue to choose the default options for all choices present</li>
+</ol>
+
+<h3>Install Node</h3>
+<ol>
+  <li>Open this link, https://nodejs.org/en/download/</li>
+  <li>Choose the installer for your respective Operating System</li>
+  <li>Open the installer</li>
+  <li>Choose all default settings</li>
 </ol>
