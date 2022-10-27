@@ -171,10 +171,6 @@ const edit = reactive({
     ShipperID: 0
 });
 
-function eyed(id) {
-    console.log(id)
-}
-
 function getAll() {
     getAllCustomers();
     getAllEmployees();
@@ -191,7 +187,6 @@ function getAllCustomers() {
         success: (data, status) => {
             if (status === 'success') {
                 customers.value = JSON.parse(data);
-                printCustomers();
             }
         }
     });
@@ -204,7 +199,6 @@ function getAllEmployees() {
         success: (data, status) => {
             if (status === 'success') {
                 employees.value = JSON.parse(data);
-                printEmployees();
             }
         }
     });
@@ -217,7 +211,6 @@ function getAllCategories() {
         success: (data, status) => {
             if (status === 'success') {
                 categories.value = JSON.parse(data);
-                printCategories();
             }
         }
     });
@@ -230,7 +223,6 @@ function getAllProducts() {
         success: (data, status) => {
             if (status === 'success') {
                 products.value = JSON.parse(data);
-                printProducts();
             }
         }
     });
@@ -243,7 +235,6 @@ function getAllSuppliers() {
         success: (data, status) => {
             if (status === 'success') {
                 suppliers.value = JSON.parse(data);
-                printSuppliers();
             }
         }
     });
@@ -256,7 +247,6 @@ function getAllShippers() {
         success: (data, status) => {
             if (status === 'success') {
                 shippers.value = JSON.parse(data);
-                printShippers();
             }
         }
     });
@@ -271,63 +261,6 @@ function getOrders() {
                 orders.value = JSON.parse(data);
         }
     });
-}
-
-function printCustomers() {
-    let ice;
-    customers.value.forEach(d => {
-        ice += `<option value="${d.CustomerID}">${d.Name} ${d.LastName}</option>`;
-    });
-    $('#cust1').html(ice);
-    $('#cust2').html(ice);
-}
-
-function printEmployees() {
-    let ice;
-    employees.value.forEach(d => {
-        ice += `<option value="${d.EmployeeID}">${d.Name} ${d.LastName}</option>`;
-    });
-    $('#emp').html(ice);
-    $('#emp2').html(ice);
-}
-
-function printCategories() {
-    let ice;
-    categories.value.forEach(d => {
-        ice += `<option value="${d.CategoryID}">${d.Name}</option>`;
-    });
-    $('#cat').html(ice);
-    $('#cat2').html(ice);
-}
-
-function printProducts() {
-    let ice;
-    products.value.forEach(d => {
-        ice += `<option value="${d.ProductID}">${d.Name}</option>`;
-    });
-    $('#pro').html(ice);
-    $('#pro2').html(ice);
-}
-
-function printSuppliers() {
-    let ice;
-    suppliers.value.forEach(d => {
-        ice += `<option value="${d.SupplierID}">${d.Name}</option>`;
-    });
-    $('#sup').html(ice);
-    $('#sup2').html(ice);
-}
-
-function printShippers() {
-    let ice;
-    shippers.value.forEach(d => {
-        ice += `<option value="${d.ID}">${d.Name}</option>`;
-        $('#shipper1').append(new Option(d.Name, d.ShipperID));
-        let select = document.getElementById('shipper1')
-        let newOp = new Option(d.Name, d.ID)
-    });
-    // $('#ship').html(ice);
-    $('#ship2').html(ice);
 }
 
 function newOrder() {
